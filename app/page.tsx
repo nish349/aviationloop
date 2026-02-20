@@ -1,7 +1,8 @@
 "use client";
 
 import { Plane, Radar, ShieldAlert, Mail } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   const [submitted, setSubmitted] = useState(false);
@@ -92,6 +93,21 @@ export default function Home() {
         </div>
 
       </main>
+
+      {/* Draggable Interactive Element */}
+      <motion.div
+        drag
+        dragConstraints={{ left: -300, right: 300, top: -300, bottom: 300 }}
+        dragElastic={0.2}
+        whileDrag={{ scale: 1.1, rotate: 15, cursor: "grabbing" }}
+        whileHover={{ scale: 1.05, cursor: "grab" }}
+        className="group fixed bottom-20 right-20 z-50 flex items-center justify-center p-3 rounded-full bg-blue-500/20 border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.3)] backdrop-blur-sm shadow-blue-500/20"
+      >
+        <Plane className="w-8 h-8 text-blue-400 rotate-[-45deg]" />
+        <span className="absolute -top-10 -left-10 bg-zinc-900 border border-zinc-700 text-xs text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none group-hover:opacity-100 flex whitespace-nowrap">
+          Drag me!
+        </span>
+      </motion.div>
 
       <footer className="absolute bottom-6 text-xs text-zinc-600">
         &copy; {new Date().getFullYear()} AviationLoop OSINT Hub. All rights reserved.
